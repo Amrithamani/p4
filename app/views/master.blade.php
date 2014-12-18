@@ -5,8 +5,12 @@
     <title>@yield('title', 'Food Recipes')</title>
 
     <meta charset='utf-8'>
+	
+	
+	
     <link rel='stylesheet' href='/css/recipes.css' type='text/css'>
 
+	
     @yield('head')
 
 </head>
@@ -14,7 +18,8 @@
 	
 	
 	
-	<a href='/'><img class='logo' src='/images/calorieCalculator.jpg' alt='foodrecipes'></a>
+	<a href='/'><img class='logo' src='/images/recipes.jpg' alt='foodrecipes'></a>
+	
 	
 	<nav>
 		<ul>

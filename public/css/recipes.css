@@ -6,6 +6,7 @@ body {
 	width:500px;
 	margin-bottom:20px;
 	display:block;
+	height:300px;
 }
 
 nav ul {
@@ -38,3 +39,8 @@ a:link, a:visited, a:active, a:hover {
 	height:375px;
 
 }
+img{
+	width:100px;
+	height:100px;
+}
+
