@@ -7,7 +7,10 @@ class UserController extends BaseController {
 	*/
 	
 	public function __construct() {
-        $this->beforeFilter('guest', array('only' => array('getLogin','getSignup')));
+        $this->beforeFilter('guest', 
+		array(
+				'only' => array('getLogin','getSignup')
+			));
     }
     
 	/**
@@ -16,7 +19,7 @@ class UserController extends BaseController {
 	*/
 	
 	public function getSignup() {
-		return View::make('signup');
+		return View::make('user_signup');
 	}
 	
 	/**
@@ -67,7 +70,7 @@ class UserController extends BaseController {
 	*/
 	
 	public function getLogin() {
-		return View::make('login');
+		return View::make('user_login');
 	}
 	
 	/**
@@ -77,7 +80,7 @@ class UserController extends BaseController {
 	
 	public function postLogin() {
 		$credentials = Input::only('email', 'password');
-		if (Auth::attempt($credentials, $remember = true)) {
+		if (Auth::attempt($credentials, $remember = false)) {
 			return Redirect::intended('/')->with('flash_message', 'Welcome Back!');
 		}
 		

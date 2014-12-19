@@ -19,11 +19,11 @@
 	
 	
 	
-	@foreach($recipes as $recipe)
+	@foreach($recipes as $title => $recipe)
 		
 		<section class='recipe'>
 		
-		<h2>{{ $recipe['title'] }}</h2>
+		<h2>{{ $title }}</h2>
 			
 
 			<p>

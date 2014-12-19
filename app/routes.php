@@ -1,5 +1,18 @@
 <?php
 
+	Route::get('/test-a', function() {
+    
+	//Session::set('foo','bar');
+    return Redirect::to('/test-b')->with('food','recipe');
+	});
+
+	Route::get('/test-b', function() {
+	
+		echo Paste\Pre::render(Session::all(),'');
+    echo Session::get('food');
+
+	});
+
 	/**
 	* Index
 	*/
@@ -28,8 +41,7 @@
 	Route::post('/recipe/edit', 'RecipeController@postEdit');
 	Route::get('/recipe/create', 'RecipeController@getCreate');
 	Route::post('/recipe/create', 'RecipeController@postCreate');
-	Route::get('/recipe/search', 'RecipeController@getSearch');
-	Route::post('/recipe/search', 'RecipeController@postSearch');
+	Route::post('/recipe/delete', 'RecipeController@postDelete');
 
 	/**
 	* Tag

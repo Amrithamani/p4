@@ -41,6 +41,7 @@ class TagController extends \BaseController {
 		$tag = new Tag;
 		$tag->name = Input::get('name');
 		$tag->save();
+		
 		return Redirect::action('TagController@index')->with('flash_message','Your tag been added.');
 	}
 	
@@ -81,6 +82,7 @@ class TagController extends \BaseController {
 			return Redirect::to('/tag')->with('flash_message', 'Tag not found');
 		}
 		
+		# Pass with the $tag object so we can do model binding on the form
 		return View::make('tag_edit')->with('tag', $tag);
 	}
 	
@@ -103,6 +105,7 @@ class TagController extends \BaseController {
 		
 		$tag->name = Input::get('name');
 		$tag->save();
+		
 		return Redirect::action('TagController@index')->with('flash_message','Your tag has been saved.');
 	}
 	
@@ -123,6 +126,7 @@ class TagController extends \BaseController {
 		}
 		
 		# Note there's a `deleting` Model event which makes sure book_tag entries are also destroyed
+		# See Tag.php for more details
 		Tag::destroy($id);
 		return Redirect::action('TagController@index')->with('flash_message','Your tag has been deleted.');
 	

@@ -1,4 +1,5 @@
 <?php
+
 class RecipeController extends \BaseController {
 	/**
 	*
@@ -9,7 +10,7 @@ class RecipeController extends \BaseController {
 		parent::__construct();
 		
 		# Only logged in users should have access to this controller
-		$this->beforeFilter('auth');
+		$this->beforeFilter('auth', array('except' => 'getIndex'));
 	}
 	/**
 	* Process the searchform
@@ -26,14 +27,16 @@ class RecipeController extends \BaseController {
 	public function getIndex() {
 		# Format and Query are passed as Query Strings
 		$format = Input::get('format', 'html');
+		
 		$query  = Input::get('query');
+		
 		$recipes = Recipe::search($query);
 		
 		# Decide on output method...
 		
 		# Default - HTML
 		if($format == 'html') {
-			return View::make('recipe')
+			return View::make('recipe_index')
 				->with('recipes', $recipes)
 				->with('query', $query);
 		}
@@ -54,7 +57,7 @@ class RecipeController extends \BaseController {
 	*/
 	public function getCreate() {
 		$foods = Food::getIdNamePair();
-    	return View::make('add')->with('foods',$foods);
+    	return View::make('recipe_add')->with('foods',$foods);
 	}
 	
 	/**
@@ -84,9 +87,9 @@ class RecipeController extends \BaseController {
 		    $foods = Food::getIdNamePair();
 		}
 		catch(exception $e) {
-		    return Redirect::to('/list')->with('flash_message', 'Book not found');
+		    return Redirect::to('/recipe')->with('flash_message', 'Recipe not found');
 		}
-    	return View::make('edit')
+    	return View::make('recipe_edit')
     		->with('recipe', $recipe)
     		->with('foods', $foods);
 	}
@@ -101,11 +104,31 @@ class RecipeController extends \BaseController {
 	        $recipe = Recipe::findOrFail(Input::get('id'));
 	    }
 	    catch(exception $e) {
-	        return Redirect::to('/list')->with('flash_message', 'Recipe not found');
+	        return Redirect::to('/recipe')->with('flash_message', 'Recipe not found');
 	    }
 	    # http://laravel.com/docs/4.2/eloquent#mass-assignment
 	    $recipe->fill(Input::all());
 	    $recipe->save();
 	   	return Redirect::action('RecipeController@getIndex')->with('flash_message','Your changes have been saved.');
 	}
+	
+	/**
+	* Process book deletion
+	*
+	* @return Redirect
+	*/
+	public function postDelete() {
+		try {
+	        $book = Book::findOrFail(Input::get('id'));
+	    }
+	    catch(exception $e) {
+	        return Redirect::to('/recipe/')->with('flash_message', 'Could not delete recipe - not found.');
+	    }
+	    
+		Recipe::destroy(Input::get('id'));
+	    
+		return Redirect::to('/recipe/')->with('flash_message', 'Recipe deleted.');
+	}
+	
+	
 }

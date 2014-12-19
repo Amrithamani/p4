@@ -11,14 +11,17 @@ class DemoController extends BaseController {
 		
 		# Bind a variable called 'bar'
 		JavaScript::put(['email' => Auth::user()->email]);
+		
 		return View::make('demo_jsVars');
+	
 	}
 	
 	public function crudCreate() {
 
 	# Instantiate a new Book model class
     $recipe = new Recipe();
-    # Set 
+   
+   # Set 
     $recipe->title = 'Apple popcorn ball';
     $recipe->food = 'Apple';
     $recipe->created = 2014;
@@ -52,7 +55,9 @@ class DemoController extends BaseController {
 		
 		# Save the changes
 		$recipe->save();
+		
 		echo "This recipe has been updated";
+	
 	}
 	
 	public function crudDelete() {
@@ -62,6 +67,7 @@ class DemoController extends BaseController {
 		
 		# Delete the book
 		$recipe->delete();
+		
 		echo "This recipe has been deleted";
 	
 	}
@@ -69,8 +75,10 @@ class DemoController extends BaseController {
 	public function collections() {
 		
 		$collection = Recipe::all();
+		
 		//echo Pre::render($collection);
 		# The many faces of a Eloquent Collection object...
+		
 		# Treat it like a string:
 		echo $collection;
 		
@@ -78,6 +86,7 @@ class DemoController extends BaseController {
 		//foreach($collection as $book) {
 		//	echo $book['title']."<br>";
 		//}
+		
 		# Treat it like an object:
 		//foreach($collection as $book) {
 		// echo $book->title."<br>";
@@ -188,5 +197,5 @@ class DemoController extends BaseController {
 		}
 	
 	}
-
+	
 }
