@@ -65,7 +65,7 @@ class DemoController extends BaseController {
 		$recipe = Recipe::first();
 		
 		# Delete the book
-		$recipe->delete();
+		$recipe=$recipe['delete'];
 		
 		echo "This recipe has been deleted";
 	
