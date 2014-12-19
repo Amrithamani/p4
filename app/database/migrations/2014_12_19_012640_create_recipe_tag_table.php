@@ -20,8 +20,8 @@ class CreateRecipeTagTable extends Migration {
 							$table->integer('tag_id')->unsigned();
 
 							# Define foreign keys...
-							$table->foreign('recipe_id')->references('id')->on('recipes');
-							$table->foreign('tag_id')->references('id')->on('tags');
+							$table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
+							$table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
 
 		});
 	}
