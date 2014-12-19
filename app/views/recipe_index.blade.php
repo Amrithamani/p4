@@ -37,7 +37,7 @@
 			</p>
 
 			<p>
-								@foreach($book['tags'] as $tag)
+								@foreach($recipe['tags'] as $tag)
 									<span class='tag'>{{{ $tag->name }}}</span>
 								@endforeach
 				</p>

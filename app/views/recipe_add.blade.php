@@ -21,7 +21,7 @@
 		{{ Form::label('image',' Image URL') }}
 		{{ Form::text('image'); }}
 
-		{{ Form::label('site_link','Purchase Link URL') }}
+		{{ Form::label('site_link','Site Link URL') }}
 		{{ Form::text('site_link'); }}
 
 		@foreach($tags as $id => $tag)

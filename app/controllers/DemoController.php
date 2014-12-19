@@ -12,9 +12,6 @@ class DemoController extends BaseController {
 	* @return View
 	*/
 	
-	public function csrf() {
-		return View::make('demo_csrf');
-	}
 	
 	
 	
@@ -144,13 +141,12 @@ class DemoController extends BaseController {
 		
 		# Get the author from this book using the "author" dynamic property
 		# "author" corresponds to the the relationship method defined in the Book model
-		$food = $recipe->food;
+		$food = $recipe['food'];
 		
 		# Print book info
-		echo $recipe->title." was written by ".$food->name."<br>";
+		echo $recipe['title']." is a recipe of ".$food['name']."<br>";
 		
-		# FYI: You could also access the author name like this:
-		//$book->author->name;
+		
 	}
 	
 	public function queryRelationsipsTags() {
@@ -178,7 +174,7 @@ class DemoController extends BaseController {
 		# With eager loading (2 queries)
 		//$books = Book::with('author')->orderBy('title')->get();
 		foreach($recipes as $recipe) {
-			echo $recipe->food->name.' wrote '.$recipe->title.'<br>';
+			echo $recipe->food->name.' is  used for '.$recipe->title.'<br>';
 		}
 	
 	}
@@ -188,12 +184,11 @@ class DemoController extends BaseController {
 		# Without eager loading (7 Queries)
 		$recipes = Recipe::orderBy('title')->get();
 		
-		# With eager loading (3 Queries)
-		//$books = Book::with('author','tags')->orderBy('title')->get();
+		
 		# Print results
 		
 		foreach($recipes as $recipe) {
-			echo $recipe->title.' by '.$recipe->food->name.'<br>';
+			echo $recipe->title.' is cooked by '.$recipe->food->name.'<br>';
 		foreach($recipe->tags as $tag) echo $tag->name.", ";
 			echo "<br><br>";
 		}

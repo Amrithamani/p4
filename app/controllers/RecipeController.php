@@ -103,7 +103,7 @@ class RecipeController extends \BaseController {
 			$tags    = Tag::getIdNamePair();
 		}
 
-		}
+		
 		catch(exception $e) {
 		    return Redirect::to('/recipe')->with('flash_message', 'Recipe not found');
 		}
@@ -125,10 +125,11 @@ class RecipeController extends \BaseController {
 	    catch(exception $e) {
 	        return Redirect::to('/recipe')->with('flash_message', 'Recipe not found');
 	    }
-	    # http://laravel.com/docs/4.2/eloquent#mass-assignment
-	    $recipe->fill(Input::except('tags'));
-	    $recipe->save();
 
+		try {
+		    # http://laravel.com/docs/4.2/eloquent#mass-assignment
+		    $recipe->fill(Input::except('tags'));
+		    $recipe->save();
 	   	# Update tags associated with this book
 		    if(!isset($_POST['tags'])) $_POST['tags'] = array();
 		    $recipe->updateTags($_POST['tags']);
@@ -137,8 +138,8 @@ class RecipeController extends \BaseController {
 	}
 
 	catch(exception $e) {
-		        return Redirect::to('/recipe')->with('flash_message', 'Error saving changes.');
-		    }
+		 return Redirect::to('/recipe')->with('flash_message', 'Error saving changes.');
+		 }
 	}
 
 	/**
@@ -148,7 +149,7 @@ class RecipeController extends \BaseController {
 	*/
 	public function postDelete() {
 		try {
-	        $book = Book::findOrFail(Input::get('id'));
+	        $recipe = Recipe::findOrFail(Input::get('id'));
 	    }
 	    catch(exception $e) {
 	        return Redirect::to('/recipe/')->with('flash_message', 'Could not delete recipe - not found.');
