@@ -9,6 +9,21 @@ body {
 	height:300px;
 }
 
+label,input {
+	display:block;
+	margin-top:10px;
+}
+
+.flash-message {
+	width:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	background-color:yellow;
+	text-align:center;
+	padding:5px;
+}
+
 nav ul {
 	list-style-type:none;
 	padding:5px 0px 5px 0px;

@@ -6,4 +6,26 @@
 
 @section('content')
 	<h1>Add a new recipe</h1>
+	
+	{{ Form::open(array('url' => '/add')) }}
+
+		{{ Form::label('title','Title') }}
+		{{ Form::text('title'); }}
+
+		{{ Form::label('food_id', 'Food') }}
+		{{ Form::select('food_id', $foods); }}
+
+		{{ Form::label('created','Created Year (YYYY)') }}
+		{{ Form::text('created'); }}
+
+		{{ Form::label('image',' Image URL') }}
+		{{ Form::text('image'); }}
+
+		{{ Form::label('site_link','Purchase Link URL') }}
+		{{ Form::text('site_link'); }}
+
+		{{ Form::submit('Add'); }}
+
+	{{ Form::close() }}
+	
 @stop

@@ -6,24 +6,32 @@
 
 @section('content')
 	<h1>List all recipes</h1>
+	
 	<div>
 	View as:
 	<a href='/list/json' target='_blank'>JSON</a>  
 	<a href='/list/pdf' target='_blank'>PDF</a>
 	</div>
 	
+	@if($query)
 	<h2>You searched for {{{ $query }}}</h2>
+	@endif
 	
-	@foreach($recipes as $title => $recipe)
+	@foreach($recipes as $recipe)
+		
 		<section class='recipe'>
-			<h2>{{ $title }}</h2>
-			{{ $recipe['food'] }} ({{$recipe['created']}})
+		
+		<h2>{{ $recipe['title'] }}</h2>
+			
 
-			<div class='tags'>
-				@foreach($recipe['tags'] as $tag)
-					{{ $tag }}
-				@endforeach
-			</div>
+			<p>
+				<a href='/edit/{{$recipe['id']}}'>Edit</a>
+			</p>
+
+			<p>
+			{{ $recipe['food']['name'] }} ({{$recipe['created']}})
+			</p>
+			
 			<img src='{{ $recipe['image'] }}'>
 			<br>
 			<a href='{{ $recipe['site_link'] }}'>Recipe...</a>
