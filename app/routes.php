@@ -66,6 +66,74 @@ Route::get('/info', function() {
 
 });
 
+Route::get('/practice-creating', function() {
+    # Instantiate a new Book model class
+    $recipe = new Recipe();
+    # Set 
+    $recipe->title = 'Apple popcorn ball';
+    $recipe->food = 'Apple';
+    $recipe->created = 2014;
+    $recipe->image = 'http://www.efoodsdirect.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/a/p/apples2.jpg';
+    $recipe->site_link = 'http://www.foodnetwork.com/recipes/articles/50-things-to-make-with-apples/things-to-make-with-apples.html';
+    # This is where the Eloquent ORM magic happens
+    $recipe->save();
+    return 'A new recipe has been added! Check your database to see...';
+});
+
+
+Route::get('/practice-reading', function() {
+    
+	# The all() method will fetch all the rows from a Model/table
+    $recipes = Recipe::all();
+    
+	# Make sure we have results before trying to print them...
+    if($recipes->isEmpty() != TRUE) {
+        # Typically we'd pass $books to a View, but for quick and dirty demonstration, let's just output here...
+        foreach($recipes as $recipe) {
+            echo $recipe->title.'<br>';
+        }
+    }
+    else {
+        return 'No recipes found';
+    }
+});
+
+
+Route::get('/practice-updating', function() {
+
+    # First get a recipe to update
+    $recipe = Recipe::where('food', 'LIKE', '%Apple%')->first();
+    
+	# If we found the recipe, update it
+    if($recipe) {
+    
+    # Give it a different title
+        $recipe->title = 'Apple corn ball';
+        # Save the changes
+        $recipe->save();
+        return "Update complete; check the database to see if your update worked...";
+    }
+    else {
+        return "Recipe not found, can't update.";
+    }
+});
+
+Route::get('/practice-deleting', function() {
+
+    # First get a recipe to delete
+    $recipe = Recipe::where('food', 'LIKE', '%Apple%')->first();
+    # If we found the recipe, delete it
+    if($recipe) {
+        # Goodbye!
+        $recipe->delete();
+        return "Deletion complete; check the database to see if it worked...";
+    }
+    else {
+        return "Can't delete - Recipe not found.";
+    }
+});
+
+
 Route::get('/get-environment',function() {
 
     echo "Environment: ".App::environment();
@@ -135,4 +203,15 @@ Route::get('/debug', function() {
 
     echo '</pre>';
 
+});
+
+/*
+Print all available routes
+*/
+Route::get('/routes', function() {
+    
+    $routeCollection = Route::getRoutes();
+    foreach($routeCollection as $value) {
+        echo "<a href='/".$value->getPath()."' target='_blank'>".$value->getPath()."</a><br>";
+    }
 });
