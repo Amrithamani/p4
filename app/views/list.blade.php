@@ -17,6 +17,10 @@
 	<h2>You searched for {{{ $query }}}</h2>
 	@endif
 	
+	@if(sizeof($recipes) == 0)
+		No results
+	@else
+	
 	@foreach($recipes as $recipe)
 		
 		<section class='recipe'>
@@ -38,5 +42,6 @@
 		</section>
 	@endforeach
 	
+	@endif
 
 @stop

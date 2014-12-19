@@ -1,14 +1,23 @@
-<!-- /app/views/login.blade.php -->
+@extends('master')
+
+@section('title')
+	Recipes
+@stop
+
+@section('content')
+
 <h1>Log in</h1>
 
 {{ Form::open(array('url' => '/login')) }}
 
-    Email<br>
-    {{ Form::text('email') }}<br><br>
+    {{ Form::label('email') }}
+    {{ Form::text('email') }}
 
-    Password:<br>
-    {{ Form::password('password') }}<br><br>
+    {{ Form::label('password') }}
+    {{ Form::password('password') }}
 
     {{ Form::submit('Submit') }}
 
 {{ Form::close() }}
+
+@stop

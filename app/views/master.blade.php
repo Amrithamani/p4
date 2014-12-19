@@ -20,15 +20,20 @@
 		<div class='flash-message'>{{ Session::get('flash_message') }}</div>
 	@endif
 	
-	<a href='/'><img class='logo' src='/images/recipes.jpg' alt='foodrecipes'></a>
-	
 	
 	<nav>
 		<ul>
-			<li><a href='/list'>List All</a></li>
+		@if(Auth::check())
+			<li><a href='/logout'>Log out  {{ Auth::user()->email; }}</a></li>
+			<li><a href='/list'>View all Recipes</a></li>
 			<li><a href='/add'>+ Add Recipe</a></li>
+		@else
+			<li><a href='/signup'>Sign up</a> or <a href='/login'>Log in</a></li>
+		@endif
 		</ul>
 	</nav>
+	
+	<a href='/'><img class='logo' src='/images/recipes.jpg' alt='foodrecipes'></a>
 	
     @yield('content')
 

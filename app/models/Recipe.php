@@ -5,7 +5,7 @@ class Recipe extends Eloquent {
 
 	public function food() {
        
-	   
+	   protected $guarded = array('id');
 		
         # Define an inverse one-to-many relationship.
         return $this->belongsTo('Food');

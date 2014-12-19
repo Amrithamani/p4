@@ -18,7 +18,7 @@ Route::get('/login',
 );
 Route::post('/login', 
     array(
-        'before' => 'csrf', 
+        'before' => ['csrf','guest'], 
         function() {
             $credentials = Input::only('email', 'password');
             if (Auth::attempt($credentials, $remember = true)) {
@@ -88,10 +88,20 @@ Route::get('/list/{format?}', function($format = 'html') {
 	$query = Input::get('query');
 	
    if($query) {
-        $recipes = Recipe::where('food','LIKE', "%$query%")->orWhere('title','LIKE',"%$query%")->get();
-    }
+        
+		$recipes = Recipe::with('tags','food')
+        ->whereHas('food', function($q) use($query) {
+            $q->where('name', 'LIKE', "%$query%");
+        })
+        ->orWhereHas('tags', function($q) use($query) {
+            $q->where('name', 'LIKE', "%$query%");
+        })
+        ->orWhere('title', 'LIKE', "%$query%")
+        ->orWhere('created', 'LIKE', "%$query%")
+        ->get();
+		}
     else {
-        $recipes = Recipe::all();
+         $recipes = Recipe::with('tags','foods');
     }
 	
     if($format == 'json') {
@@ -133,7 +143,7 @@ Route::post('/add', array('before'=>'csrf',
 
 
 // Display the form to edit a book
-Route::get('/edit/{id}', function($id = null) {
+Route::get('/edit/{id?}', array('before'=>'auth',function($id = null) {
 
 	try {
         $recipe = Recipe::findOrFail($id);
@@ -144,7 +154,7 @@ Route::get('/edit/{id}', function($id = null) {
     return View::make('edit')
         ->with('recipe', $recipe);
 
-});
+}));
 
 // Process form for a edit book
 Route::post('/edit/', function() {
@@ -272,6 +282,10 @@ Route::get('mysql-test', function() {
 
 });
 
+Route::get('/clean', function() {
+    $clean = new Clean();
+    return 'Done';
+});
 
 Route::get('/seed', function() {
     $clean = new Clean();
