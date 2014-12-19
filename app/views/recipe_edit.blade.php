@@ -18,17 +18,25 @@
 
 		{{ Form::hidden('id',$recipe['id']); }}
 
+		<div class='form-group'>
 		{{ Form::label('title','Title') }}
 		{{ Form::text('title',$recipe['title']); }}
+		</div>
 
+		<div class='form-group'>
 		{{ Form::label('created','Created Year (YYYY)') }}
 		{{ Form::text('created',$recipe['created']); }}
+		</div>
 
+		<div class='form-group'>
 		{{ Form::label('image',' Image URL') }}
 		{{ Form::text('image',$recipe['image']); }}
+		</div>
 
+		<div class='form-group'>
 		{{ Form::label('site_link','Site Link URL') }}
 		{{ Form::text('site_link',$recipe['site_link']); }}
+		</div>
 
 		{{ Form::submit('Save'); }}
 
