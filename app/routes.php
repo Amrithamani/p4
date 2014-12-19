@@ -1,5 +1,8 @@
 <?php
-
+	
+	Route::get('/classes', function() {
+	echo Paste\Pre::render(get_declared_classes(),'');
+	});
 
 	/**
 	* Index

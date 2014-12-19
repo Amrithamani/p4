@@ -14,6 +14,10 @@ label,input {
 	margin-top:10px;
 }
 
+input[type=checkbox] {
+	display:inline;
+}
+
 .flash-message {
 	width:100%;
 	position:absolute;
@@ -51,7 +55,7 @@ a:link, a:visited, a:active, a:hover {
 	width:300px;
 	margin-right:10px;
 	margin-bottom:10px;
-	height:375px;
+	height:500px;
 
 }
 img{
@@ -59,3 +63,11 @@ img{
 	height:100px;
 }
 
+.tag {
+	background-color:#F8F8F8;
+	padding:2px;
+	font-size:11px;
+	font-family:consolas;
+	margin:2px;
+	display:inline-block;
+}

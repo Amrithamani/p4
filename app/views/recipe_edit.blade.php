@@ -38,6 +38,13 @@
 		{{ Form::text('site_link',$recipe['site_link']); }}
 		</div>
 
+		<div class='form-group'>
+					@foreach($tags as $id => $tag)
+						{{ Form::checkbox('tags[]', $id, $recipe->tags->contains($id)); }} {{ $tag }}
+						&nbsp;&nbsp;&nbsp;
+					@endforeach
+		</div>
+
 		{{ Form::submit('Save'); }}
 
 	{{ Form::close() }}
