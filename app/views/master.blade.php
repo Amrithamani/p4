@@ -25,8 +25,8 @@
 		<ul>
 		@if(Auth::check())
 			<li><a href='/logout'>Log out  {{ Auth::user()->email; }}</a></li>
-			<li><a href='/list'>View all Recipes</a></li>
-			<li><a href='/add'>+ Add Recipe</a></li>
+			<li><a href='/recipe'>View all Recipes</a></li>
+			<li><a href='/recipe/create'>+ Add Recipe</a></li>
 		@else
 			<li><a href='/signup'>Sign up</a> or <a href='/login'>Log in</a></li>
 		@endif

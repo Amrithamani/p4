@@ -7,12 +7,12 @@ class BaseController extends Controller {
 	 *
 	 * @return void
 	 */
-	protected function setupLayout()
-	{
-		if ( ! is_null($this->layout))
-		{
-			$this->layout = View::make($this->layout);
-		}
+	
+	public function __construct() {
+		# Any submissions via POST need to pass the CSRF filter
+		$this->beforeFilter('csrf', array('on' => 'post'));
+
+	
 	}
 
 }

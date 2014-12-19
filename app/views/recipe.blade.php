@@ -9,17 +9,15 @@
 	
 	<div>
 	View as:
-	<a href='/list/json' target='_blank'>JSON</a>  
-	<a href='/list/pdf' target='_blank'>PDF</a>
+	<a href='/recipe/?format=json' target='_blank'>JSON</a>  
+	<a href='/recipe/?format=pdf' target='_blank'>PDF</a>
 	</div>
 	
 	@if($query)
 	<h2>You searched for {{{ $query }}}</h2>
 	@endif
 	
-	@if(sizeof($recipes) == 0)
-		No results
-	@else
+	
 	
 	@foreach($recipes as $recipe)
 		
@@ -29,7 +27,7 @@
 			
 
 			<p>
-				<a href='/edit/{{$recipe['id']}}'>Edit</a>
+				<a href='/recipe/edit/{{$recipe['id']}}'>Edit</a>
 			</p>
 
 			<p>
@@ -42,6 +40,6 @@
 		</section>
 	@endforeach
 	
-	@endif
+	
 
 @stop

@@ -7,7 +7,7 @@
 @section('content')
 	<h1>Add a new recipe</h1>
 	
-	{{ Form::open(array('url' => '/add')) }}
+	{{ Form::open(array('url' => '/recipe/create')) }}
 
 		{{ Form::label('title','Title') }}
 		{{ Form::text('title'); }}

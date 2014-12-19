@@ -10,7 +10,7 @@
 
 @section('content')
 	
-	{{ Form::open(array('url' => '/list', 'method' => 'GET')) }}
+	{{ Form::open(array('url' => '/recipe', 'method' => 'GET')) }}
 
 		{{ Form::label('query','Search') }}
 	

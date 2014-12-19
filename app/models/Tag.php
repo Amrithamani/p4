@@ -1,10 +1,12 @@
 <?php
 
 class Tag extends Eloquent { 
-
+	
+	protected $fillable = array('name');
+	
     public function recipes() {
 	
-		protected $fillable = array('name');
+		
 	
         # Tags belong to many Books
         return $this->belongsToMany('Recipe');

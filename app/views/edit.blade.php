@@ -13,7 +13,7 @@
 	<h1>Edit</h1>
 	<h2>{{{ $recipe['title'] }}}</h2>
 
-	{{ Form::open(array('url' => '/edit')) }}
+	{{ Form::open(array('url' => '/recipe/edit')) }}
 
 		{{ Form::hidden('id',$recipe['id']); }}
 

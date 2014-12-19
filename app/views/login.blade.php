@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('title')
-	Recipes
+	Log in
 @stop
 
 @section('content')
