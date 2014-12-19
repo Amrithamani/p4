@@ -65,7 +65,7 @@ class DemoController extends BaseController {
 		$recipe = Recipe::first();
 		
 		# Delete the book
-		$recipe=$recipe['delete'];
+		$recipe['delete'];
 		
 		echo "This recipe has been deleted";
 	
@@ -122,7 +122,7 @@ class DemoController extends BaseController {
 		# Or query the existing collection
 		//$first_book = $books->first();
 		
-		echo $first_recipe->title;
+		echo $first_recipe['title'];
 	}
 	
 	public function queryWithOrder() {
