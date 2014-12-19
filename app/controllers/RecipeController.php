@@ -71,7 +71,7 @@ class RecipeController extends \BaseController {
 	*/
 
 	public function postCreate() {
-
+		
 	# Instantiate the book model
 		$recipe = new Recipe();
 
