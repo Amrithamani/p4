@@ -1,19 +1,11 @@
 <?php
 class DebugController extends BaseController {
 
-	/**
-		*
-		*/
 		public function __construct() {
-			# Make sure BaseController construct gets called
+
 			parent::__construct();
 	}
 
-	/**
-	* Special method that gets triggered if the user enters a URL for a method that does not exist
-	*
-	* @return String
-	*/
 
 	public function missingMethod($parameters = array()) {
 
@@ -21,11 +13,7 @@ class DebugController extends BaseController {
 
 	}
 
-	/**
-	* http://localhost/debug/index
-	*
-	* @return String
-	*/
+
 
 	public function getIndex() {
 		echo '<pre>';
@@ -70,24 +58,12 @@ class DebugController extends BaseController {
 		echo '</pre>';
 	}
 
-	/**
-	* Trigger an error to test debug display settings
-	* http://localhost/debug/trigger-error
-	*
-	* @return Exception
-	*/
 
 	public function getTriggerError() {
 		# Class Foobar should not exist, so this should create an error
 		$food = new Foodrecipe;
 	}
 
-	/**
-	* Print all available routes
-	* http://localhost/debug/routes
-	*
-	* @return String
-	*/
 
 	public function getRoutes() {
 		$routeCollection = Route::getRoutes();
@@ -96,32 +72,22 @@ class DebugController extends BaseController {
 		}
 	}
 
-	/**
-	* http://localhost/debug/books-json
-	*
-	* @return String
-	*/
+
 
 	public function getRecipesJson() {
 
-		# Old school way of getting books using the Library class and books.json
-		# We've since updated this method with the Book model class and `books` table
 
 		# Instantiating an object of the Library class
 		$library = new Library(app_path().'/database/recipes.json');
 
-		# Get the books
+		# Get the recipes
 		$recipes = $library->getRecipes();
+
 		# Debug
 		return Pre::render($recipes, 'Recipes');
 	}
 
-	/**
-	* Old seeder - have since moved to proper seeding
-	* http://localhost/debug/seed-recipes
-	*
-	* @return String
-	*/
+
 
 	public function getSeedRecipes() {
 
@@ -136,32 +102,25 @@ class DebugController extends BaseController {
 		# Run the SQL query
 		echo DB::statement($sql);
 
-		# Get all the books just to test it worked
+		# Get all the recipes just to test it worked
 		$recipes = DB::table('recipes')->get();
 
-		# Print all the books
+		# Print all the recipes
 		echo Paste\Pre::render($recipes,'');
 	}
 
-	/*
-	* Test to make sure we can connect to MySQL
-	*
-	* @return String
-	*/
+
 
 	public function getMysqlTest() {
-	    # Print environment
+
+	   # Print environment
 	    echo 'Environment: '.App::environment().'<br>';
-	    # Use the DB component to select all the databases
+
 	    $results = DB::select('SHOW DATABASES;');
-	    # If the "Pre" package is not installed, you should output using print_r instead
+
 	    echo Pre::render($results);
 	}
 
-	/**
-	* Outputs Session and Cookie data in various forms.
-	* Used to understand how Sessions and Cookies are working
-	*/
 	public function getSessionsAndCookies() {
 
 		# Log in check
