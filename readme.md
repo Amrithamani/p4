@@ -1,7 +1,5 @@
 
- (my project name)
-  
- #Food Recipes
+#Food Recipes
 
 #Live URL 
 
