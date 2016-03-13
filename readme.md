@@ -3,7 +3,7 @@
 
 #Live URL 
 
-http://p4.amrithamani.me
+http://p4.amrithamani.com
 
 #Description of the project
 
